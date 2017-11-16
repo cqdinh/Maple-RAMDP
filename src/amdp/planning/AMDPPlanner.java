@@ -115,7 +115,10 @@ public class AMDPPlanner {
 			while(!(task.isFailure(currentState) || task.isComplete(currentState))){
 				Action a = taskPolicy.action(currentState);
 				GroundedTask child = getChildGT(task, a, currentState);
-				System.out.println(child);
+				System.out.println("Child: " + child.toString());
+				System.out.println("Action: " + a.toString());
+				System.out.println(currentState.getClass());
+				System.out.println("State: " + currentState.toString());
 				//recurse to solve the chosen subtask
 				solveTask(child, e, env);
 				
@@ -150,11 +153,11 @@ public class AMDPPlanner {
 			//to the task
 			OOSADomain domain = t.getDomain();
 			OOSADomain copy = new OOSADomain();
+			//System.out.println("Domain: " + domain);
 			List<ActionType> acts = domain.getActionTypes();
 			for(ActionType a : acts){
 				copy.addActionType(a);
 			}
-			
 			FullModel generalModel = (FullModel) domain.getModel();
 			FullModel newModel = new AMDPModel(t, generalModel);
 			copy.setModel(newModel);
@@ -197,8 +200,9 @@ public class AMDPPlanner {
 		GroundedTask gt = this.actionMap.get(aMame);
 		if(gt == null){
 			List<GroundedTask> children = t.getGroundedChildTasks(s);
+			
 			for(GroundedTask child : children){
-				this.actionMap.put(child.toString(), child);
+				this.actionMap.put(child.getAction().actionName(), child);
 			}
 			gt = this.actionMap.get(a.actionName());
 		}

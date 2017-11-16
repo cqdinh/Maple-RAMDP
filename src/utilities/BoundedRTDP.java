@@ -307,7 +307,6 @@ public class BoundedRTDP extends DynamicProgramming implements Planner {
 		HashableState csh = this.hashingFactory.hashState(s);
 		
 		while(!model.terminal(csh.s()) && (trajectory.size() < this.maxDepth+1 || this.maxDepth == -1)){
-			
 			if(this.runRolloutsInReverse){
 				trajectory.offerFirst(csh);
 			}
@@ -381,8 +380,10 @@ public class BoundedRTDP extends DynamicProgramming implements Planner {
 	 * @return a {@link StateSelectionAndExpectedGap} object holding the next state to be expanded and the expected margin size of this transition.
 	 */
 	protected StateSelectionAndExpectedGap getNextState(State s, Action a){
-		
 		if(this.selectionMode == StateSelectionMode.MODELBASED){
+			//System.out.println("State: " + s.toString());
+			//System.out.println("Action: " + a.toString());
+			//System.out.println("Result: " + model.sample(s,  a).op);
 			HashableState nsh =  this.hashingFactory.hashState(model.sample(s, a).op);
 			double gap = this.getGap(nsh);
 			return new StateSelectionAndExpectedGap(nsh, gap);

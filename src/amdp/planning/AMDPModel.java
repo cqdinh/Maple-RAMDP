@@ -59,7 +59,6 @@ public class AMDPModel implements FullModel {
 	@Override
 	public List<TransitionProb> transitions(State s, Action a) {
  		List<TransitionProb> tps = baseModel.transitions(s, a);
- 		
  		//adjust the reward and terminal values to be relevant for the task
 		for(TransitionProb tp : tps){
 			tp.eo.r = task.getReward(tp.eo.o, tp.eo.a, tp.eo.op);
@@ -67,5 +66,10 @@ public class AMDPModel implements FullModel {
 		}
 		return tps;
 	}
+	
+	public String toString() {
+		return this.task.toString();
+	}
+		
 
 }

@@ -68,7 +68,7 @@ public class TaxiGetModel implements FullStateModel {
 		TaxiGetState ns = s.copy();
 		String goal = a.getObjectParameters()[0];
 
-		TaxiGetAgent nt = s.touchTaxi();
+		TaxiGetAgent nt = ns.touchTaxi();
 		nt.set(TaxiGetDomain.ATT_LOCATION, goal);
 
 		tps.add(new StateTransitionProb(ns, 1));

@@ -3,6 +3,7 @@ package taxi.hierarchies.tasks.nav.state;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -12,12 +13,13 @@ import burlap.mdp.core.oo.state.ObjectInstance;
 import burlap.mdp.core.state.MutableState;
 import taxi.Taxi;
 import taxi.hierarchies.tasks.nav.TaxiNavDomain;
+import taxi.state.TaxiState;
 
 public class TaxiNavState implements MutableOOState{
 	private TaxiNavAgent taxi;
 	private Map<String, TaxiNavLocation> locations;
 	private Map<String, TaxiNavWall> walls;
-
+	
 	public TaxiNavState(TaxiNavAgent taxi, List<TaxiNavLocation> locations, List<TaxiNavWall> walls) {
 		this.taxi = taxi;
 		
